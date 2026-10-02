@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mtgeodesicsom"             # pip install mtgeodesicsom  ->  import mt.geodesicsom
+dynamic = ["version"]
+description = "Self-Organising Maps on geodesic domes (spherical SOM) and flat hexagonal/rectilinear grids, built on mtgeodesicdome."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "AGPL-3.0-or-later"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Masahiro Takatsuka", email = "masa@takatsuka.org" }]
+maintainers = [{ name = "Masahiro Takatsuka", email = "masa@takatsuka.org" }]
+keywords = [
+    "self-organizing map", "self-organising map", "SOM", "spherical SOM", "GeodesicSOM",
+    "geodesic dome", "kohonen", "unsupervised learning", "clustering", "visualisation",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Typing :: Typed",
+]
+dependencies = ["numpy>=1.23", "mtgeodesicdome>=1.3.0"]
+
+[project.optional-dependencies]
+interactive = ["mtgeodesicdome[interactive]>=1.3.0"]
+gpu = ["mtgeodesicdome[gpu]>=1.3.0"]                        # torch: train on an NVIDIA (CUDA) or Apple (MPS) GPU     # matplotlib, for mt.geodesicsom.gui (SOMViewer)
+notebooks = ["mtgeodesicdome[interactive]>=1.3.0", "jupyterlab", "ipywidgets>=8", "ipympl"]   # examples/notebooks/
+dev = ["matplotlib>=3.6", "pytest>=7", "pytest-cov", "ruff>=0.16,<0.17", "build", "twine"]
+all = ["mtgeodesicdome[interactive]>=1.3.0", "jupyterlab", "ipywidgets>=8", "ipympl", "pytest>=7", "pytest-cov", "ruff>=0.16,<0.17", "build", "twine"]
+
+[project.scripts]
+mtgeodesicsom = "mt.geodesicsom.gui.explorer:main"     # same as `python -m mt.geodesicsom` (needs the interactive extra)
+
+[project.urls]
+Homepage = "https://github.com/takatsuka/mtGeodesicSOM"
+Source = "https://github.com/takatsuka/mtGeodesicSOM"
+Issues = "https://github.com/takatsuka/mtGeodesicSOM/issues"
+Documentation = "https://github.com/takatsuka/mtGeodesicSOM/blob/main/docs/index.md"
+Changelog = "https://github.com/takatsuka/mtGeodesicSOM/blob/main/CHANGELOG.md"
+Paper = "https://doi.org/10.1016/j.neunet.2006.05.021"
+
+# ---------------------------------------------------------------- setuptools
+[tool.setuptools.dynamic]
+version = { attr = "mt.geodesicsom.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["mt.*"]
+namespaces = true             # `mt` is a PEP 420 namespace package (no __init__.py)
+
+[tool.setuptools.package-data]
+"mt.geodesicsom" = ["py.typed", "data/*.csv", "data/README.md"]
+
+# ---------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+# ---------------------------------------------------------------- ruff (lint + format)
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "NPY"]

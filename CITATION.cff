@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software, please cite the publication below
+  (preferred-citation) and, where appropriate, the software itself.
+title: "mtGeodesicSOM: Self-Organising Maps on geodesic domes for Python"
+type: software
+authors:
+  - family-names: Takatsuka
+    given-names: Masahiro
+    email: masa@takatsuka.org
+version: 1.1.2
+date-released: "2026-10-01"
+license: AGPL-3.0-or-later
+repository-code: "https://github.com/takatsuka/mtGeodesicSOM"
+url: "https://pypi.org/project/mtgeodesicsom/"
+keywords:
+  - self-organizing map
+  - spherical self-organizing map
+  - geodesic dome
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Wu
+      given-names: Yingxin
+    - family-names: Takatsuka
+      given-names: Masahiro
+  title: "Spherical self-organizing map using efficient indexed geodesic data structure"
+  journal: "Neural Networks"
+  volume: 19
+  issue: "6-7"
+  start: 900
+  end: 910
+  year: 2006
+  month: 7
+  doi: "10.1016/j.neunet.2006.05.021"
